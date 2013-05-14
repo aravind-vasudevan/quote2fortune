@@ -1,9 +1,8 @@
 HDR = incl/*.hpp
-#HDR = code/*.cpp 
-SRC = src/parser.cpp
+SRC = src/parser.cpp src/main.cpp
 
 OBJ = ${SRC:.cpp=.o}
-#LINK =
+LINK = -lcurl
 #INCL =
 EXE = quote2fortune.exe 
 CPP=g++ -g
@@ -15,13 +14,11 @@ TEMP = $(shell ls | grep -v "makefile")
 all: ${EXE}
 
 $(EXE): ${OBJ}
-#		${CPP} ${CPPFLAGS} -o ${EXE} ${OBJ}
 		${CPP} ${CPPFLAGS} ${OBJ} ${LINK} -o ${EXE}
 		${STRIP} ${EXE}
 
 
 parser.o: makefile parser.cpp parser.hpp
-# 		`echo ${CPP} ${CPPFLAGS} -c parser.cpp -o parser.o`
 		${CPP} ${CPPFLAGS} -c parser.cpp -o parser.o
 
 main.o: makefile main.cpp parser.o
